@@ -18,7 +18,7 @@ For Debian based system. The Arch Linux version will be available soon.
 #  Installation:
 
   ```console
-  # clone myosint repo on folder ~/myosint and cd on ~/myosint
+  # clone myosint repo into folder ~/myosint and cd into ~/myosint
   git clone https://github.com/MyCyb3r/myosint ~/myosint && cd ~/myosint
 
   # add permission for install.sh file
