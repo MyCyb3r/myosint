@@ -38,15 +38,18 @@ case "$option" in
 2)
   read -p "Target(Username): " alvo
   source ~/myosint/sherlock/venv_sherlock/bin/activate
+  echo -e "\nStarting ${CYAN}sherlock${RESET} on target ${CYAN}${alvo}${RESET}\n"
   sherlock $alvo
   deactivate
   ;;
 3)
   read -p "Target(Username): " alvo
   source ~/myosint/maigret/venv_maigret/bin/activate
+  echo -e "\nStarting ${CYAN}maigret${RESET} on target ${CYAN}${alvo}${RESET}\n"
   maigret $alvo
   deactivate
   source ~/myosint/sherlock/venv_sherlock/bin/activate
+  echo -e "\nStarting ${CYAN}sherlock${RESET} on target ${CYAN}${alvo}${RESET}\n"
   sherlock $alvo
   deactivate
   ;;
