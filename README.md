@@ -2,7 +2,7 @@
 
   Myosint is an integration of Maigret, Sherlock, and Mr. Holmes.
   
-  ![Image](https://github.com/user-attachments/assets/aaae7b34-65c2-4d71-9b78-80aae6dd2216)
+  ![Image](https://github.com/user-attachments/assets/85a2fc94-ef8a-4533-bc99-b4f5f357f7fb)
 
 #  About:
 
