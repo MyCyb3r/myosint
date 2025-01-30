@@ -1,5 +1,5 @@
 # MyOsint 
-  MyOsint is an integration of maigret sherlock mr.holmes.
+  MyOsint is an integration of maigret sherlock and mr.holmes.
 
   For Debian based system.
 
