@@ -10,7 +10,7 @@ Myosint was created to simplify the work of those who frequently use the Maigret
 
 Additionally, for each tool, it is necessary to activate the application's virtual environment, use the application, deactivate the virtual environment, and repeat the process for each one.
 
-Myosint automatically creates virtual environments for each application during installation and automates the usage process—just type the myosint command in the terminal.
+Myosint automatically creates virtual environments for each application during installation and automates the usage process, just type the myosint command in the terminal.
     
 For Debian based system. The Arch Linux version will be available soon.
 
