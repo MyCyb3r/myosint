@@ -1,0 +1,61 @@
+#!/usr/bin/env  bash
+
+# Define colors
+RED='\e[31m'
+GREEN='\e[32m'
+YELLOW='\e[33m'
+CYAN='\e[36m'
+WHITE='\e[37m'
+RESET='\e[0m'
+GRAY='\033[0;37m'
+
+echo -e "\n${CYAN}███╗   ███╗██╗   ██╗ ██████╗ ███████╗██╗███╗   ██╗████████╗
+████╗ ████║╚██╗ ██╔╝██╔═══██╗██╔════╝██║████╗  ██║╚══██╔══╝
+██╔████╔██║ ╚████╔╝ ██║   ██║███████╗██║██╔██╗ ██║   ██║   
+██║╚██╔╝██║  ╚██╔╝  ██║   ██║╚════██║██║██║╚██╗██║   ██║   
+██║ ╚═╝ ██║   ██║   ╚██████╔╝███████║██║██║ ╚████║   ██║   
+╚═╝     ╚═╝   ╚═╝    ╚═════╝ ╚══════╝╚═╝╚═╝  ╚═══╝   ╚═╝ ${RESET}Made by ${CYAN}Diego Becker${RESET}."
+
+echo -e "\n${CYAN}Enjoy${RESET}!\n"
+
+echo -e "Choose an option: \n"
+echo -e "${CYAN}[${RESET}1${CYAN}]${RESET} Maigret"
+echo -e "${CYAN}[${RESET}2${CYAN}]${RESET} Sherlock"
+echo -e "${CYAN}[${RESET}3${CYAN}]${RESET} Maigret + Sherlock"
+echo -e "${CYAN}[${RESET}4${CYAN}]${RESET} Mr.Holmes\n "
+
+read -p "Type(1-4): " option
+
+case "$option" in
+
+1)
+  read -p "Target(Username): " alvo
+  source ~/myosint/maigret/venv_maigret/bin/activate
+  echo -e "\nStarting ${CYAN}maigret${RESET} on target ${CYAN}${alvo}${RESET}\n"
+  maigret $alvo
+  deactivate
+  ;;
+2)
+  read -p "Target(Username): " alvo
+  source ~/myosint/sherlock/venv_sherlock/bin/activate
+  sherlock $alvo
+  deactivate
+  ;;
+3)
+  read -p "Target(Username): " alvo
+  source ~/myosint/maigret/venv_maigret/bin/activate
+  maigret $alvo
+  deactivate
+  source ~/myosint/sherlock/venv_sherlock/bin/activate
+  sherlock $alvo
+  deactivate
+  ;;
+4)
+  source ~/myosint/Mr.Holmes/venv_holmes/bin/activate
+  cd ~/myosint/Mr.Holmes
+  python3 ./MrHolmes.py
+  deactivate
+  ;;
+esac
+
+echo -e "\n Closing ${CYAN}MyOsint${RESET}... see you later "
