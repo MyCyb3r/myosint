@@ -7,7 +7,7 @@
   For Debian based system.
 
   
-  Installation:
+#  Installation:
 
   ```console
   # clone myosint repo on folder ~/myosint and cd on ~/myosint
@@ -19,7 +19,7 @@
   # run install.sh file
   ./install.sh
   ```
-  Usage:
+#  Usage:
   ```console
   myosint
   ```
