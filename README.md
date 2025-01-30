@@ -13,10 +13,10 @@
   # clone myosint repo on folder ~/myosint and cd on ~/myosint
   git clone https://github.com/MyCyb3r/myosint ~/myosint && cd ~/myosint
 
-  #permission for install.sh file
+  # add permission for install.sh file
   chmod +x install.sh
 
-  #run install.sh file
+  # run install.sh file
   ./install.sh
   ```
   Usage:
