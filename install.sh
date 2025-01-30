@@ -38,7 +38,7 @@ echo -e "sudo apt install python3-venv"
 sudo apt install python3-venv
 
 # create venv for maigret and activating for install
-echo -e "creating venv for maigret in ~/myosint/maigret/venv_maigret"
+echo -e "creating venv for maigret into ~/myosint/maigret/venv_maigret"
 python3 -m venv ~/myosint/maigret/venv_maigret
 source ~/myosint/maigret/venv_maigret/bin/activate
 
@@ -54,7 +54,7 @@ deactivate
 #create sherlock folder and enter into
 mkdir ~/myosint/sherlock
 cd ~/myosint/sherlock
-echo -e "creating venv for sherlock in ~/myosint/sherlock/venv_sherlock"
+echo -e "creating venv for sherlock into ~/myosint/sherlock/venv_sherlock"
 
 #create venv for sherlock and activate
 python3 -m venv ~/myosint/sherlock/venv_sherlock
