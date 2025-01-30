@@ -1,2 +1,4 @@
-# myosint
- myosint - integration maigret+sherlock+mr.holmes
+# MyOsint 
+  MyOsint is an integration of maigret sherlock mr.holmes.
+
+  
