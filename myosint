@@ -61,4 +61,4 @@ case "$option" in
   ;;
 esac
 
-echo -e "\n Closing ${CYAN}MyOsint${RESET}... see you later! "
+echo -e "\nClosing ${CYAN}MyOsint${RESET}... see you later! "
