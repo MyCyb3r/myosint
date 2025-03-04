@@ -13,10 +13,6 @@ GRAY='\033[0;37m'
 detect_package_manager() {
   if command -v apt &>/dev/null; then
     echo "apt"
-  elif command -v dnf &>/dev/null; then
-    echo "dnf"
-  elif command -v yum &>/dev/null; then
-    echo "yum"
   elif command -v pacman &>/dev/null; then
     echo "pacman"
   else
@@ -32,9 +28,6 @@ install_python_venv() {
   case $pkg_manager in
   "apt")
     sudo apt install -y python3-venv
-    ;;
-  "dnf" | "yum")
-    sudo $pkg_manager install -y python3-devel
     ;;
   "pacman")
     sudo pacman -S --noconfirm python-virtualenv
