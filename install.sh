@@ -11,39 +11,39 @@ GRAY='\033[0;37m'
 
 # Função para detectar o gerenciador de pacotes
 detect_package_manager() {
-    if command -v apt &> /dev/null; then
-        echo "apt"
-    elif command -v dnf &> /dev/null; then
-        echo "dnf"
-    elif command -v yum &> /dev/null; then
-        echo "yum"
-    elif command -v pacman &> /dev/null; then
-        echo "pacman"
-    else
-        echo "unknown"
-    fi
+  if command -v apt &>/dev/null; then
+    echo "apt"
+  elif command -v dnf &>/dev/null; then
+    echo "dnf"
+  elif command -v yum &>/dev/null; then
+    echo "yum"
+  elif command -v pacman &>/dev/null; then
+    echo "pacman"
+  else
+    echo "unknown"
+  fi
 }
 
 # Função para instalar python3-venv baseado no gerenciador de pacotes
 install_python_venv() {
-    local pkg_manager=$(detect_package_manager)
-    echo -e "${CYAN}Installing python3-venv using $pkg_manager${RESET}"
-    
-    case $pkg_manager in
-        "apt")
-            sudo apt install -y python3-venv
-            ;;
-        "dnf"|"yum")
-            sudo $pkg_manager install -y python3-venv
-            ;;
-        "pacman")
-            sudo pacman -S --noconfirm python-virtualenv
-            ;;
-        *)
-            echo -e "${RED}Unsupported package manager. Please install python3-venv manually.${RESET}"
-            exit 1
-            ;;
-    esac
+  local pkg_manager=$(detect_package_manager)
+  echo -e "${CYAN}Installing python3-venv using $pkg_manager${RESET}"
+
+  case $pkg_manager in
+  "apt")
+    sudo apt install -y python3-venv
+    ;;
+  "dnf" | "yum")
+    sudo $pkg_manager install -y python3-devel
+    ;;
+  "pacman")
+    sudo pacman -S --noconfirm python-virtualenv
+    ;;
+  *)
+    echo -e "${RED}Unsupported package manager. Please install python3-venv manually.${RESET}"
+    exit 1
+    ;;
+  esac
 }
 
 # Banner e avisos
@@ -66,7 +66,7 @@ sleep 2
 
 # Verificar e criar diretório myosint se não existir
 if [ ! -d ~/myosint ]; then
-    mkdir -p ~/myosint
+  mkdir -p ~/myosint
 fi
 
 # Entrar no diretório myosint
