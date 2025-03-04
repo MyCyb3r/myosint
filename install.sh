@@ -1,4 +1,4 @@
-#!/usr/bin/env  bash
+#!/usr/bin/env bash
 
 # Define colors
 RED='\e[31m'
@@ -9,6 +9,44 @@ WHITE='\e[37m'
 RESET='\e[0m'
 GRAY='\033[0;37m'
 
+# Função para detectar o gerenciador de pacotes
+detect_package_manager() {
+    if command -v apt &> /dev/null; then
+        echo "apt"
+    elif command -v dnf &> /dev/null; then
+        echo "dnf"
+    elif command -v yum &> /dev/null; then
+        echo "yum"
+    elif command -v pacman &> /dev/null; then
+        echo "pacman"
+    else
+        echo "unknown"
+    fi
+}
+
+# Função para instalar python3-venv baseado no gerenciador de pacotes
+install_python_venv() {
+    local pkg_manager=$(detect_package_manager)
+    echo -e "${CYAN}Installing python3-venv using $pkg_manager${RESET}"
+    
+    case $pkg_manager in
+        "apt")
+            sudo apt install -y python3-venv
+            ;;
+        "dnf"|"yum")
+            sudo $pkg_manager install -y python3-venv
+            ;;
+        "pacman")
+            sudo pacman -S --noconfirm python-virtualenv
+            ;;
+        *)
+            echo -e "${RED}Unsupported package manager. Please install python3-venv manually.${RESET}"
+            exit 1
+            ;;
+    esac
+}
+
+# Banner e avisos
 echo -e "\n${CYAN}███╗   ███╗██╗   ██╗ ██████╗ ███████╗██╗███╗   ██╗████████╗
 ████╗ ████║╚██╗ ██╔╝██╔═══██╗██╔════╝██║████╗  ██║╚══██╔══╝
 ██╔████╔██║ ╚████╔╝ ██║   ██║███████╗██║██╔██╗ ██║   ██║   
@@ -17,8 +55,8 @@ echo -e "\n${CYAN}███╗   ███╗██╗   ██╗ ████�
 ╚═╝     ╚═╝   ╚═╝    ╚═════╝ ╚══════╝╚═╝╚═╝  ╚═══╝   ╚═╝ ${RESET}Created by ${CYAN}Diego Becker${RESET}.\n"
 sleep 1
 
-echo "THIS TOOL IS MADE ONLY FOR EDUCATIONAL AND RESEARCH PURPOUSES ONLY I DO NOT ASSUME
-ANY KIND OF RESPONSIBILITY FOR ANY IMPROPE USE OF THIS TOOL USE IT WITH GOOD SENSE."
+echo -e "${YELLOW}THIS TOOL IS MADE ONLY FOR EDUCATIONAL AND RESEARCH PURPOSES ONLY. I DO NOT ASSUME
+ANY KIND OF RESPONSIBILITY FOR ANY IMPROPER USE OF THIS TOOL. USE IT WITH GOOD SENSE.${RESET}"
 
 sleep 2
 
@@ -26,54 +64,43 @@ echo -e "\n${CYAN}Enjoy${RESET}!\n"
 
 sleep 2
 
-# enter into ~/myosint folder
+# Verificar e criar diretório myosint se não existir
+if [ ! -d ~/myosint ]; then
+    mkdir -p ~/myosint
+fi
+
+# Entrar no diretório myosint
 cd ~/myosint
 
-# clone maigre
-echo -e "Cloning maigret into ~/myosint/maigret"
+# Instalar python3-venv
+install_python_venv
+
+# Instalar Maigret
+echo -e "${CYAN}Cloning maigret into ~/myosint/maigret${RESET}"
 git clone https://github.com/soxoj/maigret && cd maigret
 
-# install python3-venv
-echo -e "sudo apt install python3-venv"
-sudo apt install python3-venv
-
-# create venv for maigret and activating for install
-echo -e "creating venv for maigret into ~/myosint/maigret/venv_maigret"
+echo -e "${CYAN}Creating venv for maigret into ~/myosint/maigret/venv_maigret${RESET}"
 python3 -m venv ~/myosint/maigret/venv_maigret
 source ~/myosint/maigret/venv_maigret/bin/activate
-
-# build and install
-echo -e "Installing maigret..."
+echo -e "${CYAN}Installing maigret...${RESET}"
 pip3 install .
-
-# exit maigret venv
 deactivate
 
-#---------------------------------------------------------------------------#
-
-#create sherlock folder and enter into
-mkdir ~/myosint/sherlock
+# Instalar Sherlock
+cd ~/myosint
+mkdir -p ~/myosint/sherlock
 cd ~/myosint/sherlock
-echo -e "creating venv for sherlock into ~/myosint/sherlock/venv_sherlock"
+echo -e "${CYAN}Creating venv for sherlock into ~/myosint/sherlock/venv_sherlock${RESET}"
 
-#create venv for sherlock and activate
 python3 -m venv ~/myosint/sherlock/venv_sherlock
 source ~/myosint/sherlock/venv_sherlock/bin/activate
-
-#install sherlock
-echo -e "Installing Sherlock..."
+echo -e "${CYAN}Installing Sherlock...${RESET}"
 pip install sherlock-project
-
-#exit sherlock venv
 deactivate
 
-#------------------------------------------------------------------------------#
-
-# enter into mysonit folder
+# Instalar Mr.Holmes
 cd ~/myosint
-
-# clone mr.holmes git
-echo -e "Cloning Mr.homrd into ~/myosint/Mr.Holmes"
+echo -e "${CYAN}Cloning Mr.Holmes into ~/myosint/Mr.Holmes${RESET}"
 git clone https://github.com/Lucksi/Mr.Holmes && cd Mr.Holmes
 python3 -m venv ~/myosint/Mr.Holmes/venv_holmes
 sudo chmod +x install.sh
@@ -82,4 +109,7 @@ source ~/myosint/Mr.Holmes/venv_holmes/bin/activate
 pip3 install -r requirements.txt
 deactivate
 
-sudo ln -s ~/myosint/myosint /usr/bin/myosint
+# Criar link simbólico
+sudo ln -sf ~/myosint/myosint /usr/bin/myosint
+
+echo -e "\n${GREEN}Installation completed successfully!${RESET}\n"
